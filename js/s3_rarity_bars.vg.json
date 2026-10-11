@@ -1,0 +1,53 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Section 3: rarity of new cards each year",
+  "title": {
+    "text": "Special rare cards are taking over",
+    "subtitle": "Rarity of the new cards released each year",
+    "anchor": "start"
+  },
+  "width": 700,
+  "height": 260,
+  "data": {"url": "data/rarity_by_year.csv"},
+  "transform": [
+    {
+      "calculate": "datum.tier_no <= 2 ? 'Common or Uncommon' : datum.tier_no == 3 ? 'Rare' : 'Special rare (shiny, full art, illustration, etc.)'",
+      "as": "group"
+    },
+    {"calculate": "datum.tier_no <= 2 ? 1 : datum.tier_no == 3 ? 2 : 3", "as": "group_order"},
+    {
+      "aggregate": [{"op": "sum", "field": "share", "as": "share"}],
+      "groupby": ["year", "group", "group_order"]
+    }
+  ],
+  "config": {"view": {"stroke": null}},
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "title": null,
+      "axis": {"labelAngle": 0, "labelExpr": "datum.value % 3 == 2 ? datum.value : ''"}
+    },
+    "y": {
+      "field": "share",
+      "type": "quantitative",
+      "title": "Share of new cards",
+      "axis": {"format": "%"}
+    },
+    "color": {
+      "field": "group",
+      "type": "nominal",
+      "title": null,
+      "sort": ["Common or Uncommon", "Rare", "Special rare (shiny, full art, illustration, etc.)"],
+      "scale": {"range": ["#d9d9d9", "#969696", "#6a51a3"]},
+      "legend": {"orient": "top", "labelLimit": 400}
+    },
+    "order": {"field": "group_order", "sort": "descending"},
+    "tooltip": [
+      {"field": "year", "title": "Year"},
+      {"field": "group", "title": "Rarity"},
+      {"field": "share", "type": "quantitative", "title": "Share", "format": ".0%"}
+    ]
+  }
+}

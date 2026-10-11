@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pokémon Trading Cards: 1999 to 2026</title>
+
+  <!-- Vega, Vega-Lite and Vega-Embed -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
+
+  <!-- Pure.css for the grid layout -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/grids-responsive-min.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- Header -->
+    <header class="pure-g">
+      <div class="pure-u-1">
+        <h1>Pokémon Trading Cards: 1999 to 2026</h1>
+        <p>How the Pokémon card game has grown since it came to Australia in 1999, and where Australia fits in.</p>
+      </div>
+    </header>
+
+    <!-- Section 1 -->
+    <section class="pure-g">
+      <div class="pure-u-1 pure-u-md-1-3">
+        <div class="description description-left">
+          <h2>1. How many cards have been printed?</h2>
+          <p>Pokémon cards came out in Australia in 1999. Since then, 85 billion cards have been printed around the
+            world. Most of these are recent: about 60% were printed in just the last 5 years.</p>
+          <h3>Some terms used on this page</h3>
+          <p><b>Set:</b> a group of cards released together, e.g. <i>Base Set</i> (1999).</p>
+          <p><b>Rarity:</b> how hard a card is to find in a pack. Common cards are in every pack, the rarest
+            ones are very hard to get.</p>
+          <p><b>Type:</b> every Pokémon has a type, such as Fire, Water or Grass.</p>
+        </div>
+      </div>
+      <div class="pure-u-1 pure-u-md-2-3">
+        <div id="vis_s1_printed" class="vis-container"></div>
+      </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section class="pure-g">
+      <div class="pure-u-1">
+        <h2>2. Sets are getting bigger</h2>
+        <p>A new set of cards comes out every few months. Sets used to have about 100 cards each. Many recent sets
+          have over 200 once you count the "secret" cards, which are numbered past the end of the set
+          (e.g. card 105/102).</p>
+      </div>
+      <div class="pure-u-1">
+        <div id="vis_s2_dumbbell" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1 planned">Still to do: a beeswarm chart showing the size of every set.</div>
+    </section>
+
+    <!-- Section 3 -->
+    <section class="pure-g">
+      <div class="pure-u-1">
+        <h2>3. More rare cards</h2>
+        <p>In 1999 there were only three rarities: Common, Uncommon and Rare. Now there are lots of "special"
+          rare cards, like shiny, full art and illustration cards. Today about 4 in every 10 new cards are special
+          rares, and normal Rares have become less common.</p>
+      </div>
+      <div class="pure-u-1">
+        <div id="vis_s3_rarity" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1">
+        <p>Another way to see this is to take 100 cards from a set and colour them by rarity. Use the menu to
+          compare an older era with Scarlet &amp; Violet.</p>
+        <div id="vis_s3_waffle" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1">
+        <p>Water and Grass have the most cards overall. Fairy has the fewest because it only existed from 2014
+          to 2019. Most types have been getting a lot more new cards since around 2018.</p>
+        <div id="vis_s3_types" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1 planned">Still to do: a radial chart of cards per generation and a bump chart of the
+        most printed Pokémon.</div>
+    </section>
+
+    <!-- Section 4 -->
+    <section class="pure-g">
+      <div class="pure-u-1">
+        <h2>4. Rarer cards cost more</h2>
+        <p>Rarer cards sell for a lot more. A typical Common card sells for about 15 US cents, while a typical
+          Special illustration rare sells for about US$34.</p>
+      </div>
+      <div class="pure-u-1">
+        <div id="vis_s4_prices" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1 planned">Still to do: a treemap of the most valuable sets.</div>
+    </section>
+
+    <!-- Section 5 -->
+    <section class="pure-g">
+      <div class="pure-u-1">
+        <h2>5. Pokémon around the world</h2>
+        <p>The best players compete at the World Championships ("Worlds") every year. Compared to its
+          population, Australia sends about twice as many players as the United States.</p>
+      </div>
+      <div class="pure-u-1">
+        <div id="vis_map1_choropleth" class="vis-container"></div>
+        <p class="small-font">Notes: Hong Kong and Singapore are too small to show on the map but are in the bar
+          chart. Countries with only 1 or 2 players are not in the top 15. Data by country is only available
+          from 2025 onwards.</p>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-2">
+        <div id="vis_map2_hosts" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-2">
+        <div class="description description-right">
+          <h3>Where has Worlds been held?</h3>
+          <p>Worlds has been held in the United States 17 out of 21 times and has never been in Australia.
+            In 2027 it will be in Singapore, which is the closest it has been to Australia so far.</p>
+        </div>
+      </div>
+      <div class="pure-u-1">
+        <p>To qualify for Worlds, players earn points at official tournaments around the year. Australia hosts a
+          few of these every season.</p>
+        <div id="vis_map3_events" class="vis-container"></div>
+        <p class="small-font">Note: Japan and some other Asian countries run their own tournament series, so their
+          events are not in this data.</p>
+      </div>
+      <div class="pure-u-1">
+        <div id="vis_map4_flows" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1">
+        <p>Australian events keep getting bigger. The Melbourne Regional in May 2026 had 959 players, three times
+          as many as Perth in December 2024.</p>
+        <div id="vis_s5_au" class="vis-container"></div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pure-g">
+      <div class="pure-u-1 small-font">
+        <p>Created by Vishnumohan Vijayan (33143250) for FIT3179 Data Visualisation, Monash University, 2026.</p>
+        <p><b>Data sources:</b></p>
+        <ul>
+          <li>Cards and sets: <a href="https://tcgdex.dev" target="_blank">TCGdex</a></li>
+          <li>Pokémon generations: <a href="https://pokeapi.co" target="_blank">PokéAPI</a></li>
+          <li>Tournament results: <a href="https://labs.limitlesstcg.com" target="_blank">Limitless Labs</a></li>
+          <li>Population: <a href="https://data.worldbank.org/indicator/SP.POP.TOTL" target="_blank">World Bank</a></li>
+          <li>Card prices: TCGplayer via <a href="https://tcgcsv.com" target="_blank">tcgcsv.com</a> (2 October 2026)</li>
+          <li>Cards printed: The Pokémon Company, via <a href="https://www.pokeguardian.com/3191786_pokemon-cards-continue-strong-sales-as-total-production-hits-85-billion" target="_blank">PokeGuardian</a></li>
+          <li>Worlds host cities: <a href="https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_World_Championships" target="_blank">Bulbapedia</a></li>
+          <li>Country borders: <a href="https://www.naturalearthdata.com" target="_blank">Natural Earth</a></li>
+        </ul>
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="text/javascript">
+    var opts = { "actions": false };
+
+    vegaEmbed('#vis_s1_printed', "js/s1_cards_printed.vg.json", opts).catch(console.error);
+    vegaEmbed('#vis_s2_dumbbell', "js/s2_set_size_dumbbell.vg.json", opts).catch(console.error);
+    vegaEmbed('#vis_s3_rarity', "js/s3_rarity_bars.vg.json", opts).catch(console.error);
+    vegaEmbed('#vis_s3_waffle', "js/s3_waffle.vg.json", opts).catch(console.error);
+    vegaEmbed('#vis_s3_types', "js/s3_types_bars.vg.json", opts).catch(console.error);
+    vegaEmbed('#vis_s4_prices', "js/s4_price_bars.vg.json", opts).catch(console.error);
+    vegaEmbed('#vis_map1_choropleth', "js/map1_worlds_choropleth.vg.json", opts).catch(console.error);
+    vegaEmbed('#vis_map2_hosts', "js/map2_worlds_hosts.vg.json", opts).catch(console.error);
+    vegaEmbed('#vis_map3_events', "js/map3_events.vg.json", opts).catch(console.error);
+    vegaEmbed('#vis_map4_flows', "js/map4_flows.vg.json", opts).catch(console.error);
+    vegaEmbed('#vis_s5_au', "js/s5_au_regionals.vg.json", opts).catch(console.error);
+
+    // Section 2 timeline is hidden for now (js/s2_sets_timeline.vg.json)
+  </script>
+</body>
+
+</html>

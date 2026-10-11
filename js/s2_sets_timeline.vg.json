@@ -1,0 +1,126 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Section 2: set timeline (hidden for now)",
+  "title": {
+    "text": "Cards in every set since 1999",
+    "subtitle": "Drag on the timeline to zoom in. Double click to reset.",
+    "anchor": "start"
+  },
+  "vconcat": [
+    {
+      "width": 820,
+      "height": 50,
+      "layer": [
+        {
+          "data": {"url": "data/eras.csv"},
+          "transform": [{"calculate": "datum.era_order % 2", "as": "stripe"}],
+          "params": [{"name": "brush", "select": {"type": "interval", "encodings": ["x"]}}],
+          "mark": {"type": "rect", "opacity": 0.9},
+          "encoding": {
+            "x": {
+              "field": "start",
+              "type": "temporal",
+              "title": null,
+              "axis": {"format": "%Y", "tickCount": 14}
+            },
+            "x2": {"field": "end"},
+            "color": {
+              "field": "stripe",
+              "type": "nominal",
+              "scale": {"range": ["#d9d9d9", "#bdbdbd"]},
+              "legend": null
+            },
+            "tooltip": [
+              {"field": "era", "title": "Era"},
+              {"field": "sets", "type": "quantitative", "title": "Sets"},
+              {"field": "avg_official", "type": "quantitative", "title": "Average numbered cards"},
+              {"field": "avg_total", "type": "quantitative", "title": "Average with secret cards"}
+            ]
+          }
+        },
+        {
+          "data": {"url": "data/eras.csv"},
+          "transform": [
+            {
+              "calculate": "{'Wizards era': 'Wizards', 'EX': 'EX', 'Diamond & Pearl': 'D&P', 'HeartGold & SoulSilver': 'HG', 'Black & White': 'B&W', 'XY': 'XY', 'Sun & Moon': 'S&M', 'Sword & Shield': 'Sw&Sh', 'Scarlet & Violet': 'S&V', 'Mega Evolution': 'Mega'}[datum.era]",
+              "as": "short"
+            },
+            {"calculate": "(toDate(datum.start) + toDate(datum.end)) / 2", "as": "middle"}
+          ],
+          "mark": {"type": "text", "fontSize": 10, "dy": -12},
+          "encoding": {"x": {"field": "middle", "type": "temporal"}, "text": {"field": "short"}}
+        },
+        {
+          "data": {"url": "data/sets_clean.csv"},
+          "mark": {"type": "tick", "color": "#333", "thickness": 1, "size": 14, "yOffset": 10},
+          "encoding": {"x": {"field": "release_date", "type": "temporal"}}
+        }
+      ]
+    },
+    {
+      "width": 820,
+      "height": 280,
+      "data": {"url": "data/sets_clean.csv"},
+      "transform": [
+        {"fold": ["official", "secret"], "as": ["part", "cards"]},
+        {
+          "calculate": "datum.part == 'official' ? 'Numbered cards' : 'Secret cards (numbered past the end, e.g. 105/102)'",
+          "as": "Card kind"
+        },
+        {"calculate": "datum.part == 'official' ? 0 : 1", "as": "stack_order"}
+      ],
+      "layer": [
+        {
+          "mark": {"type": "bar", "size": 5, "clip": true},
+          "encoding": {
+            "x": {
+              "field": "release_date",
+              "type": "temporal",
+              "title": "Release date",
+              "scale": {"domain": {"param": "brush"}},
+              "axis": {"format": "%b %Y", "labelOverlap": true}
+            },
+            "y": {"field": "cards", "type": "quantitative", "stack": "zero", "title": "Cards in the set"},
+            "color": {
+              "field": "Card kind",
+              "type": "nominal",
+              "scale": {"range": ["#bdbdbd", "#e6550d"]},
+              "legend": {"orient": "top", "title": null, "labelLimit": 400}
+            },
+            "order": {"field": "stack_order"},
+            "tooltip": [
+              {"field": "set_name", "title": "Set"},
+              {
+                "field": "release_date",
+                "type": "temporal",
+                "title": "Released",
+                "format": "%d %b %Y"
+              },
+              {"field": "era", "title": "Era"},
+              {"field": "official", "type": "quantitative", "title": "Numbered cards"},
+              {"field": "secret", "type": "quantitative", "title": "Secret cards"},
+              {"field": "total", "type": "quantitative", "title": "Total"}
+            ]
+          }
+        },
+        {
+          "data": {"values": [{}]},
+          "mark": {"type": "text", "align": "left", "baseline": "top", "fontSize": 12, "lineHeight": 16},
+          "encoding": {
+            "x": {"value": 10},
+            "y": {"value": 8},
+            "text": {
+              "value": [
+                "Secret cards per set, on average:",
+                "about 5 before 2017",
+                "about 64 in Scarlet & Violet (2023 to 2025)"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {"view": {"stroke": null}},
+  "resolve": {"scale": {"color": "independent"}}
+}

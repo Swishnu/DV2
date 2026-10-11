@@ -1,0 +1,126 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Section 3: cards by type, click a bar to see that type over time",
+  "title": {
+    "text": "Which types have the most cards?",
+    "subtitle": "Click a type to see how many new cards it got each year",
+    "anchor": "start"
+  },
+  "data": {"url": "data/types_by_year.csv"},
+  "hconcat": [
+    {
+      "width": 280,
+      "height": 260,
+      "title": {"text": "All cards, 1999 to 2026", "fontSize": 12},
+      "transform": [{"aggregate": [{"op": "sum", "field": "cards", "as": "total"}], "groupby": ["type1"]}],
+      "encoding": {
+        "y": {
+          "field": "type1",
+          "type": "nominal",
+          "title": null,
+          "sort": {"field": "total", "op": "sum", "order": "descending"}
+        },
+        "x": {"field": "total", "type": "quantitative", "title": "Cards", "axis": {"tickCount": 4}}
+      },
+      "layer": [
+        {
+          "params": [
+            {
+              "name": "Type_pick",
+              "value": [{"type1": "Fire"}],
+              "select": {"type": "point", "fields": ["type1"]}
+            }
+          ],
+          "mark": {"type": "bar", "cursor": "pointer"},
+          "encoding": {
+            "color": {
+              "field": "type1",
+              "type": "nominal",
+              "legend": null,
+              "scale": {
+                "domain": [
+                  "Grass",
+                  "Fire",
+                  "Water",
+                  "Lightning",
+                  "Psychic",
+                  "Fighting",
+                  "Darkness",
+                  "Metal",
+                  "Fairy",
+                  "Dragon",
+                  "Colorless"
+                ],
+                "range": [
+                  "#5fae46",
+                  "#e8622c",
+                  "#3f8fd9",
+                  "#f2c12e",
+                  "#9b59b6",
+                  "#a0522d",
+                  "#3b3b3b",
+                  "#8c9aa8",
+                  "#ef8fb4",
+                  "#b8902a",
+                  "#bdb59c"
+                ]
+              }
+            },
+            "opacity": {"condition": {"param": "Type_pick", "value": 1, "empty": false}, "value": 0.35},
+            "tooltip": [
+              {"field": "type1", "title": "Type"},
+              {"field": "total", "type": "quantitative", "title": "Cards"}
+            ]
+          }
+        },
+        {
+          "mark": {"type": "text", "align": "left", "dx": 3, "fontSize": 10},
+          "encoding": {"text": {"field": "total", "type": "quantitative", "format": ","}}
+        }
+      ]
+    },
+    {
+      "width": 380,
+      "height": 260,
+      "title": {"text": "New cards each year for the type you picked", "fontSize": 12},
+      "transform": [{"filter": {"param": "Type_pick", "empty": false}}],
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "title": null,
+          "scale": {"domain": [1999, 2026]},
+          "axis": {"format": "d", "tickCount": 6}
+        },
+        "y": {
+          "field": "cards",
+          "type": "quantitative",
+          "title": "New cards",
+          "scale": {"domain": [0, 200]}
+        }
+      },
+      "layer": [
+        {
+          "mark": {"type": "line", "point": true, "strokeWidth": 2.5},
+          "encoding": {
+            "color": {"field": "type1", "type": "nominal", "legend": null},
+            "tooltip": [
+              {"field": "type1", "title": "Type"},
+              {"field": "year", "title": "Year"},
+              {"field": "cards", "type": "quantitative", "title": "New cards"}
+            ]
+          }
+        },
+        {
+          "transform": [{"filter": "datum.year == 2026"}],
+          "mark": {"type": "text", "align": "right", "dx": -6, "dy": -12, "fontWeight": "bold"},
+          "encoding": {
+            "text": {"field": "type1"},
+            "color": {"field": "type1", "type": "nominal", "legend": null}
+          }
+        }
+      ]
+    }
+  ],
+  "config": {"view": {"stroke": null}}
+}
