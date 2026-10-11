@@ -1,0 +1,28 @@
+era,dex_id,cards,rank,pokemon,era_order
+Wizards era,201.0,25,1,Unown,0
+Wizards era,26.0,14,3,Raichu,0
+Wizards era,6.0,11,4,Charizard,0
+Wizards era,38.0,10,7,Ninetales,0
+EX,201.0,27,1,Unown,1
+EX,25.0,9,10,Pikachu,1
+Diamond & Pearl,201.0,28,1,Unown,2
+Diamond & Pearl,25.0,8,4,Pikachu,2
+Diamond & Pearl,479.0,8,5,Rotom,2
+Diamond & Pearl,26.0,7,6,Raichu,2
+HeartGold & SoulSilver,201.0,4,2,Unown,3
+HeartGold & SoulSilver,26.0,3,8,Raichu,3
+HeartGold & SoulSilver,38.0,3,10,Ninetales,3
+XY,6.0,14,1,Charizard,5
+XY,25.0,9,4,Pikachu,5
+XY,26.0,7,8,Raichu,5
+Sun & Moon,6.0,13,2,Charizard,6
+Sun & Moon,25.0,13,3,Pikachu,6
+Sun & Moon,26.0,12,4,Raichu,6
+Sun & Moon,38.0,11,9,Ninetales,6
+Sword & Shield,25.0,23,1,Pikachu,7
+Sword & Shield,6.0,17,4,Charizard,7
+Scarlet & Violet,25.0,13,2,Pikachu,8
+Scarlet & Violet,479.0,12,4,Rotom,8
+Mega Evolution,6.0,6,1,Charizard,9
+Mega Evolution,479.0,6,2,Rotom,9
+Mega Evolution,25.0,4,10,Pikachu,9

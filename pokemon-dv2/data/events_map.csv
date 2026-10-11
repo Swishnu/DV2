@@ -1,0 +1,75 @@
+event_id,name,tier,city,host_iso2,date,season,players,lat,lon,source_url
+0001,Regional Championship Baltimore,Regional,Baltimore,US,2024-09-13,2025,2307,39.2908816,-76.610759,https://labs.limitlesstcg.com/0001/standings
+0002,Regional Championship Dortmund,Regional,Dortmund,DE,2024-09-28,2025,1815,51.5142273,7.4652789,https://labs.limitlesstcg.com/0002/standings
+0003,Regional Championship Joinville,Regional,Joinville,BR,2024-09-28,2025,578,-26.3044898,-48.8486726,https://labs.limitlesstcg.com/0003/standings
+0004,Special Event Lima,Special Event,Lima,PE,2024-10-05,2025,304,-12.0459808,-77.0305912,https://labs.limitlesstcg.com/0004/standings
+0005,Regional Championship Louisville,Regional,Louisville,US,2024-10-11,2025,1938,38.2542376,-85.759407,https://labs.limitlesstcg.com/0005/standings
+0006,Regional Championship Lille,Regional,Lille,FR,2024-10-19,2025,1311,50.6365654,3.0635282,https://labs.limitlesstcg.com/0006/standings
+0007,Regional Championship Gdańsk,Regional,Gdańsk,PL,2024-11-02,2025,1372,54.4288032,18.798327,https://labs.limitlesstcg.com/0007/standings
+0008,Special Event Buenos Aires,Special Event,Buenos Aires,AR,2024-11-09,2025,275,-34.6095579,-58.3887904,https://labs.limitlesstcg.com/0008/standings
+0009,International Championship São Paulo,International,São Paulo,BR,2024-11-15,2025,1810,-23.5506507,-46.6333824,https://labs.limitlesstcg.com/0009/standings
+0010,Regional Championship Sacramento,Regional,Sacramento,US,2024-11-22,2025,1705,38.5810606,-121.493895,https://labs.limitlesstcg.com/0010/standings
+0011,Regional Championship Stuttgart,Regional,Stuttgart,DE,2024-11-30,2025,1702,48.7784485,9.1800132,https://labs.limitlesstcg.com/0011/standings
+0012,Special Event Bogotá,Special Event,Bogotá,CO,2024-12-07,2025,215,4.6533817,-74.0836331,https://labs.limitlesstcg.com/0012/standings
+0013,Regional Championship Perth,Regional,Perth,AU,2024-12-07,2025,318,-31.9558967,115.8605784,https://labs.limitlesstcg.com/0013/standings
+0014,Regional Championship Toronto,Regional,Toronto,CA,2024-12-13,2025,2137,43.6534817,-79.3839347,https://labs.limitlesstcg.com/0014/standings
+0015,Regional Championship Birmingham,Regional,Birmingham,GB,2025-01-18,2025,2018,52.4948994,-1.8518439,https://labs.limitlesstcg.com/0015/standings
+0016,Regional Championship Rio de Janeiro,Regional,Rio de Janeiro,BR,2025-01-18,2025,1139,-22.9110137,-43.2093727,https://labs.limitlesstcg.com/0016/standings
+0017,Regional Championship San Antonio,Regional,San Antonio,US,2025-01-24,2025,2400,29.4246002,-98.4951405,https://labs.limitlesstcg.com/0017/standings
+0018,Regional Championship Mérida,Regional,Mérida,MX,2025-02-08,2025,1151,20.9670759,-89.6237402,https://labs.limitlesstcg.com/0018/standings
+0019,Special Event San Juan,Special Event,San Juan,PR,2025-02-15,2025,299,18.4655,-66.1057,https://labs.limitlesstcg.com/0019/standings
+0020,International Championship London,International,London,GB,2025-02-21,2025,3361,51.5074456,-0.1277653,https://labs.limitlesstcg.com/0020/standings
+0021,Regional Championship Vancouver,Regional,Vancouver,CA,2025-03-07,2025,1314,49.2608724,-123.113952,https://labs.limitlesstcg.com/0021/standings
+0022,Regional Championship Fortaleza,Regional,Fortaleza,BR,2025-03-08,2025,715,-3.7932167,-38.5280359,https://labs.limitlesstcg.com/0022/standings
+0023,Regional Championship Stockholm,Regional,Stockholm,SE,2025-03-22,2025,815,59.3251172,18.0710935,https://labs.limitlesstcg.com/0023/standings
+0024,Regional Championship Brisbane,Regional,Brisbane,AU,2025-03-29,2025,470,-27.4689623,153.0235009,https://labs.limitlesstcg.com/0024/standings
+0025,Regional Championship Atlanta,Regional,Atlanta,US,2025-04-11,2025,2684,33.7544657,-84.3898151,https://labs.limitlesstcg.com/0025/standings
+0026,Regional Championship Monterrey,Regional,Monterrey,MX,2025-04-19,2025,1327,25.6802019,-100.315258,https://labs.limitlesstcg.com/0026/standings
+0027,Special Event Seville,Special Event,Seville,ES,2025-04-26,2025,817,37.3886303,-5.9953403,https://labs.limitlesstcg.com/0027/standings
+0028,Regional Championship Milwaukee,Regional,Milwaukee,US,2025-05-02,2025,1657,43.0386475,-87.9090751,https://labs.limitlesstcg.com/0028/standings
+0029,Regional Championship Melbourne,Regional,Melbourne,AU,2025-05-17,2025,563,-37.8142454,144.9631732,https://labs.limitlesstcg.com/0029/standings
+0030,Special Event Utrecht,Special Event,Utrecht,NL,2025-05-17,2025,1241,52.0907006,5.1215634,https://labs.limitlesstcg.com/0030/standings
+0031,Regional Championship Santiago,Regional,Santiago,CL,2025-05-17,2025,1249,-33.4376995,-70.6510671,https://labs.limitlesstcg.com/0031/standings
+0032,Regional Championship Portland,Regional,Portland,US,2025-05-23,2025,1688,45.5202471,-122.674194,https://labs.limitlesstcg.com/0032/standings
+0033,Special Event Bologna,Special Event,Bologna,IT,2025-05-31,2025,1239,44.4938203,11.3426327,https://labs.limitlesstcg.com/0033/standings
+0034,International Championship New Orleans,International,New Orleans,US,2025-06-13,2025,3812,29.9561422,-90.0733934,https://labs.limitlesstcg.com/0034/standings
+0035,World Championship Anaheim,Worlds,Anaheim,US,2025-08-15,2025,721,33.8347516,-117.911732,https://labs.limitlesstcg.com/0035/standings
+0036,Regional Championship Frankfurt,Regional,Frankfurt,DE,2025-09-13,2026,2433,50.1106444,8.6820917,https://labs.limitlesstcg.com/0036/standings
+0037,Regional Championship Monterrey,Regional,Monterrey,MX,2025-09-13,2026,1620,25.6802019,-100.315258,https://labs.limitlesstcg.com/0037/standings
+0038,Regional Championship Pittsburgh,Regional,Pittsburgh,US,2025-09-19,2026,2691,40.4406968,-80.0025666,https://labs.limitlesstcg.com/0038/standings
+0039,Regional Championship Belo Horizonte,Regional,Belo Horizonte,BR,2025-10-11,2026,1117,-19.9227318,-43.9450948,https://labs.limitlesstcg.com/0039/standings
+0040,Regional Championship Milwaukee,Regional,Milwaukee,US,2025-10-10,2026,2305,43.0386475,-87.9090751,https://labs.limitlesstcg.com/0040/standings
+0041,Regional Championship Lille,Regional,Lille,FR,2025-10-25,2026,2028,50.6365654,3.0635282,https://labs.limitlesstcg.com/0041/standings
+0042,Regional Championship Brisbane,Regional,Brisbane,AU,2025-11-01,2026,617,-27.4689623,153.0235009,https://labs.limitlesstcg.com/0042/standings
+0043,Regional Championship Gdańsk,Regional,Gdańsk,PL,2025-11-01,2026,1675,54.4288032,18.798327,https://labs.limitlesstcg.com/0043/standings
+0044,Regional Championship Las Vegas,Regional,Las Vegas,US,2025-11-14,2026,2919,36.1674263,-115.1484131,https://labs.limitlesstcg.com/0044/standings
+0045,Special Event Buenos Aires,Special Event,Buenos Aires,AR,2025-11-15,2026,350,-34.6095579,-58.3887904,https://labs.limitlesstcg.com/0045/standings
+0046,International Championship São Paulo,International,São Paulo,BR,2025-11-21,2026,2117,-23.5506507,-46.6333824,https://labs.limitlesstcg.com/0046/standings
+0047,Regional Championship Stuttgart,Regional,Stuttgart,DE,2025-11-29,2026,2200,48.7784485,9.1800132,https://labs.limitlesstcg.com/0047/standings
+0048,Regional Championship Toronto,Regional,Toronto,CA,2026-01-16,2026,2270,43.6534817,-79.3839347,https://labs.limitlesstcg.com/0048/standings
+0049,Regional Championship Birmingham,Regional,Birmingham,GB,2026-01-24,2026,2344,52.4948994,-1.8518439,https://labs.limitlesstcg.com/0049/standings
+0050,Regional Championship Mérida,Regional,Mérida,MX,2026-01-24,2026,1690,20.9670759,-89.6237402,https://labs.limitlesstcg.com/0050/standings
+0051,Special Event Auckland,Special Event,Auckland,NZ,2026-01-24,2026,80,-36.852095,174.7631803,https://labs.limitlesstcg.com/0051/standings
+0052,Regional Championship Sydney,Regional,Sydney,AU,2026-02-07,2026,699,-33.8698439,151.2082848,https://labs.limitlesstcg.com/0052/standings
+0053,Regional Championship Santiago,Regional,Santiago,CL,2026-02-07,2026,1670,-33.4376995,-70.6510671,https://labs.limitlesstcg.com/0053/standings
+0054,International Championship London,International,London,GB,2026-02-13,2026,4010,51.5074456,-0.1277653,https://labs.limitlesstcg.com/0054/standings
+0055,Regional Championship Seattle,Regional,Seattle,US,2026-02-27,2026,2231,47.6038321,-122.330062,https://labs.limitlesstcg.com/0055/standings
+0056,Special Event San Juan,Special Event,San Juan,PR,2026-03-07,2026,356,18.4655,-66.1057,https://labs.limitlesstcg.com/0056/standings
+0057,Regional Championship Curitiba,Regional,Curitiba,BR,2026-03-14,2026,1449,-25.4295963,-49.2712724,https://labs.limitlesstcg.com/0057/standings
+0058,Regional Championship Houston,Regional,Houston,US,2026-03-20,2026,2635,29.7589382,-95.3676974,https://labs.limitlesstcg.com/0058/standings
+0059,Special Event Seville,Special Event,Seville,ES,2026-03-28,2026,1337,37.3886303,-5.9953403,https://labs.limitlesstcg.com/0059/standings
+0060,Regional Championship Orlando,Regional,Orlando,US,2026-04-03,2026,2745,28.5421218,-81.379045,https://labs.limitlesstcg.com/0060/standings
+0061,Regional Championship Querétaro,Regional,Querétaro,MX,2026-04-04,2026,1446,20.8052225,-99.8837376,https://labs.limitlesstcg.com/0061/standings
+0062,Regional Championship Prague,Regional,Prague,CZ,2026-04-25,2026,1370,50.0874654,14.4212535,https://labs.limitlesstcg.com/0062/standings
+0063,Regional Championship Los Angeles,Regional,Los Angeles,US,2026-05-08,2026,1849,34.0536909,-118.242766,https://labs.limitlesstcg.com/0063/standings
+0064,Regional Championship Utrecht,Regional,Utrecht,NL,2026-05-16,2026,2150,52.0907006,5.1215634,https://labs.limitlesstcg.com/0064/standings
+0065,Regional Championship Campinas,Regional,Campinas,BR,2026-05-16,2026,1725,-22.9056391,-47.059564,https://labs.limitlesstcg.com/0065/standings
+0066,Regional Championship Melbourne,Regional,Melbourne,AU,2026-05-23,2026,959,-37.8142454,144.9631732,https://labs.limitlesstcg.com/0066/standings
+0067,Special Event Lima,Special Event,Lima,PE,2026-05-23,2026,499,-12.0459808,-77.0305912,https://labs.limitlesstcg.com/0067/standings
+0068,Regional Championship Indianapolis,Regional,Indianapolis,US,2026-05-29,2026,1974,39.7683331,-86.1583502,https://labs.limitlesstcg.com/0068/standings
+0069,Special Event Turin,Special Event,Turin,IT,2026-06-06,2026,2033,45.0677551,7.6824892,https://labs.limitlesstcg.com/0069/standings
+0070,International Championship New Orleans,International,New Orleans,US,2026-06-12,2026,3752,29.9561422,-90.0733934,https://labs.limitlesstcg.com/0070/standings
+0071,World Championship San Francisco,Worlds,San Francisco,US,2026-08-28,2026,797,37.7879363,-122.4075201,https://labs.limitlesstcg.com/0071/standings
+0072,Regional Championship Baltimore,Regional,Baltimore,US,2026-09-18,2027,3122,39.2908816,-76.610759,https://labs.limitlesstcg.com/0072/standings
+0073,Regional Championship Brisbane,Regional,Brisbane,AU,2026-09-26,2027,817,-27.4689623,153.0235009,https://labs.limitlesstcg.com/0073/standings
+0074,Regional Championship Frankfurt,Regional,Frankfurt,DE,2026-09-26,2027,2793,50.1106444,8.6820917,https://labs.limitlesstcg.com/0074/standings

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Section 4: typical price for each rarity",
+  "title": {
+    "text": "Typical price of one card, by rarity",
+    "subtitle": "Median price in US dollars, cards from 2023 to 2026 sets (October 2026)",
+    "anchor": "start"
+  },
+  "width": 520,
+  "height": 260,
+  "data": {"url": "data/prices_modern_by_tier.csv"},
+  "transform": [
+    {
+      "aggregate": [
+        {"op": "median", "field": "market_usd", "as": "median_price"},
+        {"op": "count", "as": "cards"}
+      ],
+      "groupby": ["tier", "tier_no"]
+    },
+    {"calculate": "replace(datum.tier, '-', ' ')", "as": "rarity"}
+  ],
+  "encoding": {
+    "y": {"field": "rarity", "type": "nominal", "title": null, "sort": {"field": "tier_no", "op": "min"}},
+    "x": {
+      "field": "median_price",
+      "type": "quantitative",
+      "title": "Typical price (US$)",
+      "axis": {"format": "$,.0f", "tickCount": 6}
+    }
+  },
+  "layer": [
+    {
+      "mark": "bar",
+      "encoding": {
+        "color": {"condition": {"test": "datum.tier_no >= 4", "value": "#6a51a3"}, "value": "#969696"},
+        "tooltip": [
+          {"field": "rarity", "title": "Rarity"},
+          {
+            "field": "median_price",
+            "type": "quantitative",
+            "title": "Typical price (US$)",
+            "format": "$,.2f"
+          },
+          {"field": "cards", "type": "quantitative", "title": "Cards checked"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "align": "left", "dx": 4, "fontSize": 11},
+      "encoding": {"text": {"field": "median_price", "type": "quantitative", "format": "$,.2f"}}
+    }
+  ],
+  "config": {"view": {"stroke": null}}
+}

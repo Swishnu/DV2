@@ -1,0 +1,71 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Section 3: waffle charts comparing 100 cards from an older era with 100 cards from Scarlet & Violet",
+  "title": {
+    "text": "What 100 cards from a set look like",
+    "subtitle": "Each square is 1 card. Pick an older era to compare with Scarlet & Violet (2023 to 2025).",
+    "anchor": "start"
+  },
+  "data": {"url": "data/waffle_era_rarity.csv"},
+  "params": [
+    {
+      "name": "Era_pick",
+      "value": "Wizards era",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Wizards era",
+          "EX",
+          "Diamond & Pearl",
+          "HeartGold & SoulSilver",
+          "Black & White",
+          "XY",
+          "Sun & Moon",
+          "Sword & Shield"
+        ],
+        "name": "Older era: "
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum.era == Era_pick || datum.era == 'Scarlet & Violet'"},
+    {
+      "calculate": "datum.era == 'Scarlet & Violet' ? 'Scarlet & Violet (2023 to 2025)' : 'Older era: ' + datum.era",
+      "as": "panel"
+    },
+    {
+      "calculate": "datum.tier_no <= 2 ? 'Common or Uncommon' : datum.tier_no == 3 ? 'Rare' : 'Special rare'",
+      "as": "group"
+    }
+  ],
+  "facet": {
+    "column": {
+      "field": "panel",
+      "type": "nominal",
+      "title": null,
+      "sort": "ascending",
+      "header": {"labelFontSize": 13, "labelFontWeight": "bold"}
+    }
+  },
+  "spec": {
+    "width": 250,
+    "height": 250,
+    "mark": {"type": "square", "size": 380, "opacity": 1},
+    "encoding": {
+      "x": {"field": "col", "type": "ordinal", "axis": null},
+      "y": {"field": "row", "type": "ordinal", "axis": null, "sort": "descending"},
+      "color": {
+        "field": "group",
+        "type": "nominal",
+        "title": null,
+        "scale": {
+          "domain": ["Common or Uncommon", "Rare", "Special rare"],
+          "range": ["#d9d9d9", "#969696", "#6a51a3"]
+        },
+        "legend": {"orient": "top"}
+      },
+      "tooltip": [{"field": "era", "title": "Era"}, {"field": "tier", "title": "Rarity"}]
+    }
+  },
+  "config": {"view": {"stroke": null}}
+}

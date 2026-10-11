@@ -1,0 +1,56 @@
+/* Basic styles from the Week 9 studio example. Will style properly later. */
+
+body * {
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    background-color: lightgray;
+}
+
+.page {
+    max-width: 1000px;
+    background-color: white;
+    margin: auto;
+    padding: 50px;
+    padding-top: 35px;
+}
+
+h1 {
+    font-weight: 900;
+}
+
+.vis-container {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.description h2,
+h1 {
+    margin-top: 0px;
+}
+
+.description-left {
+    padding-right: 20px;
+}
+
+.description-right {
+    padding-left: 20px;
+}
+
+.pure-g {
+    margin-bottom: 40px;
+}
+
+.small-font {
+    font-size: 14px;
+}
+
+/* "Still to do" notes for the draft */
+.planned {
+    color: #888;
+    font-style: italic;
+    border-left: 3px solid #ccc;
+    padding-left: 10px;
+    margin-top: 10px;
+}
