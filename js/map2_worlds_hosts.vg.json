@@ -1,6 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Map 2: Worlds host cities",
   "title": {
     "text": "World Championship host cities",
     "subtitle": "Bigger circle = hosted more times. No Worlds held in person in 2020 and 2021.",

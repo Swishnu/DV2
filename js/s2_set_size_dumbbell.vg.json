@@ -1,6 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Section 2: dumbbell chart of average set size in each era",
   "title": {
     "text": "Average cards per set in each era",
     "subtitle": "Grey dot = numbered cards. Orange dot = total including secret cards.",

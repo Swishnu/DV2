@@ -1,6 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Section 5: players at each Australian Regional Championship",
   "title": {
     "text": "Australian Regional Championships are growing",
     "subtitle": "Players at each event",

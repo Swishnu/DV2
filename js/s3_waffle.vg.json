@@ -1,6 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Section 3: waffle charts comparing 100 cards from an older era with 100 cards from Scarlet & Violet",
   "title": {
     "text": "What 100 cards from a set look like",
     "subtitle": "Each square is 1 card. Pick an older era to compare with Scarlet & Violet (2023 to 2025).",

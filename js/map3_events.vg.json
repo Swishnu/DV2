@@ -1,6 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Map 3: dot map of official tournaments, filtered by dragging on the timeline below",
   "title": {
     "text": "Official tournaments, September 2024 to September 2026",
     "subtitle": "Bigger dot = more players. Drag across the timeline under the map to show only those months.",

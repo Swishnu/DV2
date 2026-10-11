@@ -1,6 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Section 4: typical price for each rarity",
   "title": {
     "text": "Typical price of one card, by rarity",
     "subtitle": "Median price in US dollars, cards from 2023 to 2026 sets (October 2026)",

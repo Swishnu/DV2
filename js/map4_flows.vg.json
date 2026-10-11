@@ -1,6 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Map 4: flow map of players travelling to Worlds 2026 in San Francisco",
   "title": {
     "text": "Where the players at Worlds 2026 came from",
     "subtitle": "Each line goes from a country to San Francisco. Thicker line = more players. Australia is in red.",

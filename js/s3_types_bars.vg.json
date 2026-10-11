@@ -1,6 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Section 3: cards by type, click a bar to see that type over time",
   "title": {
     "text": "Which types have the most cards?",
     "subtitle": "Click a type to see how many new cards it got each year",

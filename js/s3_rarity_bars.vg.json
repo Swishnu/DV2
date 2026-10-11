@@ -1,6 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Section 3: rarity of new cards each year",
   "title": {
     "text": "Special rare cards are taking over",
     "subtitle": "Rarity of the new cards released each year",

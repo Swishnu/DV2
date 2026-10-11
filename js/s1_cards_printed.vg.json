@@ -1,6 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Section 1: Pokémon cards printed over time",
   "title": {
     "text": "Total Pokémon cards printed",
     "subtitle": "Billions of cards, worldwide",

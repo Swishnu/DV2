@@ -1,6 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Section 2: set timeline (hidden for now)",
   "title": {
     "text": "Cards in every set since 1999",
     "subtitle": "Drag on the timeline to zoom in. Double click to reset.",
