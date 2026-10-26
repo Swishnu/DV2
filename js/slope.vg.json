@@ -10,7 +10,7 @@
   "width": 260,
   "height": 400,
   "data": {
-    "url": "data/worlds_by_country.csv",
+    "url": "data/worlds_players.csv",
     "format": {
       "parse": {
         "players": "number",

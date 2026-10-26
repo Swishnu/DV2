@@ -231,7 +231,7 @@
     },
     {
       "name": "flows",
-      "url": "data/worlds_flows.csv",
+      "url": "data/flows.csv",
       "format": {
         "type": "csv",
         "parse": {

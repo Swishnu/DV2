@@ -38,7 +38,7 @@
     },
     {
       "data": {
-        "url": "data/worlds_hosts.csv"
+        "url": "data/hosts.csv"
       },
       "transform": [
         {

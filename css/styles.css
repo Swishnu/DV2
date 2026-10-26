@@ -96,11 +96,11 @@ p {
 
 .description-right {
     padding-left: 24px;
-    padding-top: 5px;
+    padding-top: 10px;
 }
 
 .description-right h3 {
-    font-size: 17px;
+    font-size: 19px;
     line-height: 1.2;
     margin-bottom: 10px;
 }
@@ -194,4 +194,15 @@ input:focus-visible {
 .special {
   color: #6a51a3;
   font-weight: 700;
+}
+
+.byline {
+    max-width: none;
+    white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+    .byline {
+        white-space: normal;
+    }
 }

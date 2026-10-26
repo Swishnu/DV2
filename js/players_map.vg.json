@@ -82,7 +82,7 @@
         },
         {
           "data": {
-            "url": "data/worlds_by_country.csv",
+            "url": "data/worlds_players.csv",
             "format": {
               "parse": {
                 "players": "number",
@@ -173,7 +173,7 @@
         },
         {
           "data": {
-            "url": "data/worlds_by_country.csv",
+            "url": "data/worlds_players.csv",
             "format": {
               "parse": {
                 "players": "number",
@@ -232,7 +232,7 @@
         "fontSize": 12
       },
       "data": {
-        "url": "data/worlds_by_country.csv",
+        "url": "data/worlds_players.csv",
         "format": {
           "parse": {
             "players": "number",

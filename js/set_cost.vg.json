@@ -20,7 +20,7 @@
   "data": [
     {
       "name": "sets",
-      "url": "data/set_values.csv",
+      "url": "data/set_cost.csv",
       "format": {
         "type": "csv",
         "parse": {

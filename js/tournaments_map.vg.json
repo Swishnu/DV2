@@ -6,7 +6,7 @@
     "anchor": "start"
   },
   "data": {
-    "url": "data/events_map.csv"
+    "url": "data/tournaments.csv"
   },
   "transform": [
     {

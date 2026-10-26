@@ -2,15 +2,12 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "A Special illustration rare typically sells for about 230 times a Common",
-    "subtitle": [
-      "Each box shows the price range of the middle half of cards; the number is the typical (median) price.",
-      "Lines show the usual range. The axis goes up in steps of 10 times. US dollars, October 2026."
-    ]
+    "subtitle": "Market prices as of 2 October 2026 (US$)"
   },
   "width": "container",
   "height": 380,
   "data": {
-    "url": "data/prices_modern_by_tier.csv",
+    "url": "data/prices.csv",
     "format": {
       "parse": {
         "market_usd": "number",
