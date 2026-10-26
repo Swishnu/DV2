@@ -1,0 +1,229 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Total Pokémon cards printed",
+    "subtitle": "Billions of cards, worldwide",
+    "anchor": "start"
+  },
+  "width": "container",
+  "height": 320,
+  "data": {
+    "url": "data/print_runs.csv"
+  },
+  "encoding": {
+    "x": {
+      "field": "as_of",
+      "type": "temporal",
+      "title": null,
+      "axis": {
+        "format": "%Y",
+        "tickCount": 12,
+        "grid": false,
+        "labelFontSize": 12
+      }
+    }
+  },
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "start": "2021-03-31",
+            "end": "2026-03-31"
+          }
+        ]
+      },
+      "mark": {
+        "type": "rect",
+        "color": "#fde68a",
+        "opacity": 0.35
+      },
+      "encoding": {
+        "x": {
+          "field": "start",
+          "type": "temporal"
+        },
+        "x2": {
+          "field": "end"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "area",
+        "color": "#f5b700",
+        "opacity": 0.25,
+        "interpolate": "monotone"
+      },
+      "encoding": {
+        "y": {
+          "field": "cumulative_billion",
+          "type": "quantitative",
+          "title": "Billions of cards",
+          "scale": {
+            "domain": [
+              0,
+              90
+            ]
+          },
+          "axis": {
+            "tickCount": 5,
+            "gridColor": "#eee",
+            "labelFontSize": 12
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "color": "#c98a00",
+        "strokeWidth": 2.5,
+        "interpolate": "monotone"
+      },
+      "encoding": {
+        "y": {
+          "field": "cumulative_billion",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "color": "#c98a00",
+        "size": 45
+      },
+      "encoding": {
+        "y": {
+          "field": "cumulative_billion",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "as_of",
+            "type": "temporal",
+            "title": "As of",
+            "format": "%B %Y"
+          },
+          {
+            "field": "cumulative_billion",
+            "type": "quantitative",
+            "title": "Cards printed (billions)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "(year(datum.as_of) == 2021 || year(datum.as_of) == 2026) && month(datum.as_of) == 2"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": -14,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#222"
+      },
+      "encoding": {
+        "y": {
+          "field": "cumulative_billion",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "cumulative_billion",
+          "type": "quantitative",
+          "format": ".1f"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "x": "2023-09-30",
+            "y": 24,
+            "t": "51 billion printed since 2021"
+          },
+          {
+            "x": "2023-09-30",
+            "y": 18,
+            "t": "(about 60% of all cards)"
+          },
+          {
+            "x": "2017-03-31",
+            "y": 40,
+            "t": "Less than 2 billion"
+          },
+          {
+            "x": "2017-03-31",
+            "y": 34,
+            "t": "per year before 2020"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "color": "#333",
+        "align": "center"
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "temporal"
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "t"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Nunito Sans, sans-serif",
+    "axis": {
+      "domainColor": "#999",
+      "tickColor": "#999",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 700,
+      "labelColor": "#444",
+      "titleColor": "#444"
+    },
+    "title": {
+      "font": "Fredoka, Nunito Sans, sans-serif",
+      "fontSize": 19,
+      "fontWeight": 600,
+      "color": "#222",
+      "subtitleFont": "Nunito Sans, sans-serif",
+      "subtitleFontSize": 13,
+      "subtitleColor": "#5d6573",
+      "anchor": "start",
+      "offset": 10
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 700,
+      "labelColor": "#444"
+    },
+    "header": {
+      "labelFontSize": 14,
+      "labelFont": "Nunito Sans, sans-serif"
+    },
+    "text": {
+      "fontSize": 12
+    }
+  }
+}

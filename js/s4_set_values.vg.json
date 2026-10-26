@@ -1,0 +1,211 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "title": {
+    "text": "Older sets usually cost more to complete",
+    "subtitle": "Cost to buy one of every card in a set, US dollars (October 2026). Each dot is a set, grouped by era.",
+    "anchor": "start",
+    "font": "Fredoka, Nunito Sans, sans-serif",
+    "fontSize": 19,
+    "fontWeight": 600,
+    "color": "#222",
+    "subtitleFont": "Nunito Sans, sans-serif",
+    "subtitleFontSize": 13,
+    "subtitleColor": "#5d6573",
+    "offset": 10
+  },
+  "width": 840,
+  "height": 360,
+  "padding": 5,
+  "autosize": "pad",
+  "data": [
+    {
+      "name": "sets",
+      "url": "data/set_values.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "value_usd": "number",
+          "top_card_usd": "number",
+          "cards": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "formula",
+          "as": "name",
+          "expr": "replace(datum.set_name, regexp('^([A-Z]{2,4}[0-9]*(\\\\.[0-9])?: |SM - |XY - )'), '')"
+        },
+        {
+          "type": "window",
+          "sort": {
+            "field": "value_usd",
+            "order": "descending"
+          },
+          "ops": [
+            "rank"
+          ],
+          "as": [
+            "rank"
+          ]
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "x",
+      "type": "band",
+      "domain": [
+        "Wizards era",
+        "EX",
+        "Diamond & Pearl",
+        "HeartGold & SoulSilver",
+        "Black & White",
+        "XY",
+        "Sun & Moon",
+        "Sword & Shield",
+        "Scarlet & Violet",
+        "Mega Evolution"
+      ],
+      "range": "width"
+    },
+    {
+      "name": "y",
+      "type": "linear",
+      "domain": {
+        "data": "sets",
+        "field": "value_usd"
+      },
+      "range": "height",
+      "zero": true,
+      "nice": true
+    }
+  ],
+  "axes": [
+    {
+      "orient": "bottom",
+      "scale": "x",
+      "labelAngle": -25,
+      "labelAlign": "right",
+      "labelFont": "Nunito Sans, sans-serif",
+      "labelFontSize": 12,
+      "domainColor": "#999",
+      "tickColor": "#999",
+      "labelColor": "#444"
+    },
+    {
+      "orient": "left",
+      "scale": "y",
+      "format": "$,.0f",
+      "grid": true,
+      "gridColor": "#eee",
+      "title": "Cost to complete (US$)",
+      "titleFont": "Nunito Sans, sans-serif",
+      "labelFont": "Nunito Sans, sans-serif",
+      "domain": false,
+      "tickCount": 6,
+      "labelFontSize": 12,
+      "labelColor": "#444"
+    }
+  ],
+  "marks": [
+    {
+      "name": "nodes",
+      "type": "symbol",
+      "from": {
+        "data": "sets"
+      },
+      "encode": {
+        "enter": {
+          "xfocus": {
+            "scale": "x",
+            "field": "era",
+            "band": 0.5
+          },
+          "yfocus": {
+            "scale": "y",
+            "field": "value_usd"
+          },
+          "size": {
+            "value": 60
+          },
+          "fill": {
+            "signal": "datum.rank <= 5 ? '#252525' : '#bdbdbd'"
+          },
+          "fillOpacity": {
+            "value": 0.8
+          },
+          "stroke": {
+            "value": "white"
+          },
+          "strokeWidth": {
+            "value": 0.8
+          },
+          "tooltip": {
+            "signal": "{'Set': datum.name, 'Era': datum.era, 'Released': timeFormat(toDate(datum.published_on), '%B %Y'), 'Cost to complete': format(datum.value_usd, '$,.0f'), 'Most expensive card': format(datum.top_card_usd, '$,.0f')}"
+          }
+        }
+      },
+      "transform": [
+        {
+          "type": "force",
+          "static": true,
+          "iterations": 300,
+          "forces": [
+            {
+              "force": "collide",
+              "radius": 5
+            },
+            {
+              "force": "x",
+              "x": "xfocus",
+              "strength": 0.1
+            },
+            {
+              "force": "y",
+              "y": "yfocus",
+              "strength": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "nodes"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "datum.x + (datum.datum.era == 'Mega Evolution' ? -8 : 8)"
+          },
+          "y": {
+            "field": "y"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "text": {
+            "signal": "datum.datum.rank <= 5 ? datum.datum.name : ''"
+          },
+          "fill": {
+            "value": "#252525"
+          },
+          "font": {
+            "value": "Nunito Sans, sans-serif"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fontWeight": {
+            "value": 700
+          },
+          "align": {
+            "signal": "datum.datum.era == 'Mega Evolution' ? 'right' : 'left'"
+          }
+        }
+      }
+    }
+  ]
+}

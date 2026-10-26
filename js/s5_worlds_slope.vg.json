@@ -1,0 +1,199 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Worlds grew from 721 to 797 players",
+    "subtitle": [
+      "Players from the biggest countries and Australia. Steeper line = faster growth.",
+      "Mexico and Chile grew fastest; Australia went from 18 to 21."
+    ]
+  },
+  "width": 260,
+  "height": 400,
+  "data": {
+    "url": "data/worlds_by_country.csv",
+    "format": {
+      "parse": {
+        "players": "number",
+        "season": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "indexof(['Japan','United States','China','Taiwan','Chile','Mexico','Australia'], datum.country) >= 0"
+    },
+    {
+      "calculate": "datum.season == 2025 ? 'Worlds 2025' : 'Worlds 2026'",
+      "as": "event"
+    },
+    {
+      "calculate": "datum.iso2 == 'AU' ? 'Australia' : 'Other countries'",
+      "as": "group"
+    },
+    {
+      "calculate": "datum.season == 2025 ? datum.players : 0",
+      "as": "p25"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "p25",
+          "as": "players_2025"
+        }
+      ],
+      "groupby": [
+        "country"
+      ]
+    },
+    {
+      "calculate": "datum.country + '  ' + datum.players_2025 + ' → ' + datum.players",
+      "as": "label"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "event",
+      "type": "ordinal",
+      "title": null,
+      "axis": {
+        "labelAngle": 0,
+        "labelFontSize": 13,
+        "labelFontWeight": 800,
+        "domain": false,
+        "ticks": false,
+        "labelPadding": 10
+      },
+      "scale": {
+        "padding": 0.05
+      }
+    },
+    "y": {
+      "field": "players",
+      "type": "quantitative",
+      "axis": null,
+      "scale": {
+        "type": "log",
+        "domain": [
+          16,
+          160
+        ]
+      }
+    },
+    "detail": {
+      "field": "country"
+    },
+    "color": {
+      "field": "group",
+      "type": "nominal",
+      "legend": null,
+      "scale": {
+        "domain": [
+          "Australia",
+          "Other countries"
+        ],
+        "range": [
+          "#d9342b",
+          "#5f6b7a"
+        ]
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line"
+      },
+      "encoding": {
+        "strokeWidth": {
+          "condition": {
+            "test": "datum.iso2 == 'AU'",
+            "value": 4
+          },
+          "value": 2
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 60,
+        "opacity": 1
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "country",
+            "title": "Country"
+          },
+          {
+            "field": "event",
+            "title": "Event"
+          },
+          {
+            "field": "players",
+            "type": "quantitative",
+            "title": "Players"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.season == 2026"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 13,
+        "fontWeight": 800
+      },
+      "encoding": {
+        "text": {
+          "field": "label"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Nunito Sans, sans-serif",
+    "title": {
+      "font": "Fredoka, Nunito Sans, sans-serif",
+      "fontSize": 19,
+      "fontWeight": 600,
+      "color": "#222",
+      "subtitleFont": "Nunito Sans, sans-serif",
+      "subtitleFontSize": 13,
+      "subtitleColor": "#5d6573",
+      "anchor": "start",
+      "offset": 10
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 700,
+      "labelColor": "#444",
+      "titleColor": "#444"
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 700,
+      "labelColor": "#444"
+    },
+    "header": {
+      "labelFontSize": 14,
+      "labelFont": "Nunito Sans, sans-serif"
+    },
+    "text": {
+      "fontSize": 12
+    }
+  }
+}

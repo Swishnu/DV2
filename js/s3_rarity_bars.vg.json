@@ -1,0 +1,217 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Special rare cards are taking over",
+    "subtitle": "Rarity of the new cards released each year",
+    "anchor": "start"
+  },
+  "width": "container",
+  "height": 300,
+  "data": {
+    "url": "data/rarity_by_year.csv"
+  },
+  "transform": [
+    {
+      "calculate": "datum.tier_no <= 2 ? 'Common or Uncommon' : datum.tier_no == 3 ? 'Rare' : 'Special rare (shiny, full art, illustration, etc.)'",
+      "as": "group"
+    },
+    {
+      "calculate": "datum.tier_no <= 2 ? 1 : datum.tier_no == 3 ? 2 : 3",
+      "as": "group_order"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "share",
+          "as": "share"
+        }
+      ],
+      "groupby": [
+        "year",
+        "group",
+        "group_order"
+      ]
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Nunito Sans, sans-serif",
+    "title": {
+      "font": "Fredoka, Nunito Sans, sans-serif",
+      "fontSize": 19,
+      "fontWeight": 600,
+      "color": "#222",
+      "subtitleFont": "Nunito Sans, sans-serif",
+      "subtitleFontSize": 13,
+      "subtitleColor": "#5d6573",
+      "anchor": "start",
+      "offset": 10
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 700,
+      "labelColor": "#444",
+      "titleColor": "#444"
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 700,
+      "labelColor": "#444"
+    },
+    "header": {
+      "labelFontSize": 14,
+      "labelFont": "Nunito Sans, sans-serif"
+    },
+    "text": {
+      "fontSize": 12
+    }
+  },
+  "layer": [
+    {
+      "mark": "bar",
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": null,
+          "axis": {
+            "labelAngle": 0,
+            "labelExpr": "datum.value % 3 == 2 ? datum.value : ''"
+          }
+        },
+        "y": {
+          "field": "share",
+          "type": "quantitative",
+          "title": "Share of new cards",
+          "axis": {
+            "format": "%"
+          },
+          "scale": {
+            "domain": [
+              0,
+              1
+            ]
+          }
+        },
+        "color": {
+          "field": "group",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Common or Uncommon",
+            "Rare",
+            "Special rare (shiny, full art, illustration, etc.)"
+          ],
+          "scale": {
+            "range": [
+              "#d9d9d9",
+              "#969696",
+              "#6a51a3"
+            ]
+          },
+          "legend": {
+            "orient": "top",
+            "labelLimit": 400
+          }
+        },
+        "order": {
+          "field": "group_order",
+          "sort": "descending"
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "title": "Year"
+          },
+          {
+            "field": "group",
+            "title": "Rarity"
+          },
+          {
+            "field": "share",
+            "type": "quantitative",
+            "title": "Share",
+            "format": ".0%"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": "2003",
+            "y": 0.9
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontWeight": 700,
+        "color": "#3f2a7a",
+        "baseline": "top",
+        "lineHeight": 15,
+        "align": "left",
+        "dx": -8
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative"
+        },
+        "text": {
+          "value": [
+            "2003: the first special",
+            "rares appear"
+          ]
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": "2021",
+            "y": 0.9
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontWeight": 700,
+        "color": "#3f2a7a",
+        "baseline": "top",
+        "lineHeight": 15,
+        "align": "right",
+        "dx": 8
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative"
+        },
+        "text": {
+          "value": [
+            "2021: 42 in 100 new cards are",
+            "special rares, the most so far"
+          ]
+        }
+      }
+    }
+  ]
+}

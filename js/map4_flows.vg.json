@@ -1,0 +1,795 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "title": {
+    "text": "Where the players at Worlds 2026 came from",
+    "subtitle": "Each line runs from a country to San Francisco; thicker = more players. Use + and − or scroll to zoom, and drag to move.",
+    "anchor": "start",
+    "font": "Fredoka, Nunito Sans, sans-serif",
+    "fontSize": 19,
+    "fontWeight": 600,
+    "color": "#222",
+    "subtitleFont": "Nunito Sans, sans-serif",
+    "subtitleFontSize": 13,
+    "subtitleColor": "#5d6573",
+    "offset": 10
+  },
+  "width": 880,
+  "height": 380,
+  "padding": 5,
+  "autosize": {
+    "type": "pad",
+    "contains": "padding"
+  },
+  "signals": [
+    {
+      "name": "Region_pick",
+      "value": "World",
+      "bind": {
+        "input": "select",
+        "options": [
+          "World",
+          "Americas",
+          "Asia and Pacific",
+          "Europe and Africa"
+        ],
+        "name": "Zoom to: "
+      }
+    },
+    {
+      "name": "preset",
+      "update": "Region_pick == 'Americas' ? [250, 395, 215] : Region_pick == 'Asia and Pacific' ? [230, 708, 227] : Region_pick == 'Europe and Africa' ? [430, -136, 595] : [155, 440, 207]"
+    },
+    {
+      "name": "anchor",
+      "value": [
+        0,
+        0
+      ],
+      "on": [
+        {
+          "events": "wheel",
+          "update": "xy()"
+        },
+        {
+          "events": "@zoom_in:click, @zoom_out:click",
+          "update": "[width / 2, height / 2]"
+        }
+      ]
+    },
+    {
+      "name": "zoom",
+      "value": 1,
+      "on": [
+        {
+          "events": "wheel!",
+          "force": true,
+          "update": "clamp(scale * pow(1.0015, -event.deltaY * pow(16, event.deltaMode)), 120, 2500) / scale"
+        },
+        {
+          "events": "@zoom_in:click",
+          "force": true,
+          "update": "clamp(scale * 1.6, 120, 2500) / scale"
+        },
+        {
+          "events": "@zoom_out:click",
+          "force": true,
+          "update": "clamp(scale / 1.6, 120, 2500) / scale"
+        }
+      ]
+    },
+    {
+      "name": "scale",
+      "init": "155",
+      "on": [
+        {
+          "events": {
+            "signal": "zoom"
+          },
+          "update": "scale * zoom"
+        },
+        {
+          "events": {
+            "signal": "preset"
+          },
+          "update": "preset[0]"
+        },
+        {
+          "events": "dblclick",
+          "update": "preset[0]"
+        },
+        {
+          "events": "@reset_btn:click",
+          "update": "preset[0]"
+        }
+      ]
+    },
+    {
+      "name": "drag_start",
+      "value": null,
+      "on": [
+        {
+          "events": "mousedown[!event.item || !event.item.mark || (event.item.mark.name != 'zoom_in' && event.item.mark.name != 'zoom_out' && event.item.mark.name != 'reset_btn')]",
+          "update": "[x(), y(), tx, ty]"
+        },
+        {
+          "events": "window:mouseup",
+          "update": "null"
+        }
+      ]
+    },
+    {
+      "name": "tx",
+      "init": "440",
+      "on": [
+        {
+          "events": {
+            "signal": "zoom"
+          },
+          "update": "anchor[0] - (anchor[0] - tx) * zoom"
+        },
+        {
+          "events": "window:mousemove",
+          "update": "drag_start ? drag_start[2] + x() - drag_start[0] : tx"
+        },
+        {
+          "events": {
+            "signal": "preset"
+          },
+          "update": "preset[1]"
+        },
+        {
+          "events": "dblclick",
+          "update": "preset[1]"
+        },
+        {
+          "events": "@reset_btn:click",
+          "update": "preset[1]"
+        }
+      ]
+    },
+    {
+      "name": "ty",
+      "init": "207",
+      "on": [
+        {
+          "events": {
+            "signal": "zoom"
+          },
+          "update": "anchor[1] - (anchor[1] - ty) * zoom"
+        },
+        {
+          "events": "window:mousemove",
+          "update": "drag_start ? drag_start[3] + y() - drag_start[1] : ty"
+        },
+        {
+          "events": {
+            "signal": "preset"
+          },
+          "update": "preset[2]"
+        },
+        {
+          "events": "dblclick",
+          "update": "preset[2]"
+        },
+        {
+          "events": "@reset_btn:click",
+          "update": "preset[2]"
+        }
+      ]
+    },
+    {
+      "name": "cursor",
+      "value": "grab",
+      "on": [
+        {
+          "events": "mousedown",
+          "update": "'grabbing'"
+        },
+        {
+          "events": "window:mouseup",
+          "update": "'grab'"
+        }
+      ]
+    }
+  ],
+  "projections": [
+    {
+      "name": "projection",
+      "type": "equalEarth",
+      "rotate": [
+        100,
+        0,
+        0
+      ],
+      "scale": {
+        "signal": "scale"
+      },
+      "translate": [
+        {
+          "signal": "tx"
+        },
+        {
+          "signal": "ty"
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "name": "world",
+      "url": "js/ne_110m_admin_0_countries.topojson",
+      "format": {
+        "type": "topojson",
+        "feature": "ne_110m_admin_0_countries"
+      },
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.properties.ADM0_A3 != 'ATA'"
+        }
+      ]
+    },
+    {
+      "name": "flows",
+      "url": "data/worlds_flows.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "players": "number",
+          "season": "number",
+          "src_lat": "number",
+          "src_lon": "number",
+          "dst_lat": "number",
+          "dst_lon": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.season == 2026"
+        },
+        {
+          "type": "formula",
+          "as": "group",
+          "expr": "datum.iso2 == 'AU' ? 'Australia' : datum.players >= 30 ? 'Biggest senders (30+ players)' : 'Other countries'"
+        },
+        {
+          "type": "formula",
+          "as": "order",
+          "expr": "datum.iso2 == 'AU' ? 3 : datum.players >= 30 ? 2 : 1"
+        },
+        {
+          "type": "geopoint",
+          "projection": "projection",
+          "fields": [
+            "src_lon",
+            "src_lat"
+          ],
+          "as": [
+            "x1",
+            "y1"
+          ]
+        },
+        {
+          "type": "geopoint",
+          "projection": "projection",
+          "fields": [
+            "dst_lon",
+            "dst_lat"
+          ],
+          "as": [
+            "x2",
+            "y2"
+          ]
+        },
+        {
+          "type": "collect",
+          "sort": {
+            "field": "order"
+          }
+        }
+      ]
+    },
+    {
+      "name": "city",
+      "values": [
+        {
+          "lon": -122.4,
+          "lat": 37.8,
+          "name": "San Francisco"
+        }
+      ],
+      "transform": [
+        {
+          "type": "geopoint",
+          "projection": "projection",
+          "fields": [
+            "lon",
+            "lat"
+          ],
+          "as": [
+            "x",
+            "y"
+          ]
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": [
+        "Australia",
+        "Biggest senders (30+ players)",
+        "Other countries"
+      ],
+      "range": [
+        "#d9342b",
+        "#2a75bb",
+        "#b8b8b8"
+      ]
+    },
+    {
+      "name": "width",
+      "type": "linear",
+      "domain": [
+        1,
+        141
+      ],
+      "range": [
+        0.6,
+        9
+      ]
+    }
+  ],
+  "legends": [
+    {
+      "fill": "color",
+      "orient": "top",
+      "direction": "horizontal",
+      "symbolType": "circle",
+      "labelFont": "Nunito Sans, sans-serif",
+      "labelFontSize": 12,
+      "labelColor": "#444",
+      "labelLimit": 400,
+      "columnPadding": 16
+    }
+  ],
+  "marks": [
+    {
+      "type": "group",
+      "encode": {
+        "enter": {
+          "width": {
+            "signal": "width"
+          },
+          "height": {
+            "signal": "height"
+          },
+          "clip": {
+            "value": true
+          },
+          "fill": {
+            "value": "transparent"
+          }
+        },
+        "update": {
+          "cursor": {
+            "signal": "cursor"
+          }
+        }
+      },
+      "marks": [
+        {
+          "type": "shape",
+          "from": {
+            "data": "world"
+          },
+          "encode": {
+            "update": {
+              "fill": {
+                "value": "#ececec"
+              },
+              "stroke": {
+                "value": "white"
+              },
+              "strokeWidth": {
+                "value": 0.5
+              }
+            }
+          },
+          "transform": [
+            {
+              "type": "geoshape",
+              "projection": "projection"
+            }
+          ]
+        },
+        {
+          "type": "rule",
+          "from": {
+            "data": "flows"
+          },
+          "encode": {
+            "update": {
+              "x": {
+                "field": "x1"
+              },
+              "y": {
+                "field": "y1"
+              },
+              "x2": {
+                "field": "x2"
+              },
+              "y2": {
+                "field": "y2"
+              },
+              "stroke": {
+                "scale": "color",
+                "field": "group"
+              },
+              "strokeWidth": {
+                "scale": "width",
+                "field": "players"
+              },
+              "strokeOpacity": {
+                "signal": "datum.group == 'Other countries' ? 0.45 : 0.9"
+              },
+              "strokeCap": {
+                "value": "round"
+              },
+              "tooltip": {
+                "signal": "{'Country': datum.country, 'Players': datum.players}"
+              }
+            }
+          }
+        },
+        {
+          "type": "symbol",
+          "from": {
+            "data": "flows"
+          },
+          "encode": {
+            "update": {
+              "x": {
+                "field": "x1"
+              },
+              "y": {
+                "field": "y1"
+              },
+              "size": {
+                "value": 25
+              },
+              "fill": {
+                "scale": "color",
+                "field": "group"
+              },
+              "tooltip": {
+                "signal": "{'Country': datum.country, 'Players': datum.players}"
+              }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "from": {
+            "data": "flows"
+          },
+          "encode": {
+            "update": {
+              "x": {
+                "field": "x1"
+              },
+              "y": {
+                "field": "y1"
+              },
+              "dy": {
+                "value": 13
+              },
+              "align": {
+                "value": "center"
+              },
+              "text": {
+                "signal": "datum.players >= 30 || datum.iso2 == 'AU' || (scale >= 300 && datum.players >= 14) || (scale >= 700 && datum.players >= 5) || scale >= 1200 ? datum.country : ''"
+              },
+              "fill": {
+                "signal": "datum.group == 'Other countries' ? '#555' : scale('color', datum.group)"
+              },
+              "font": {
+                "value": "Nunito Sans, sans-serif"
+              },
+              "fontSize": {
+                "value": 12
+              },
+              "fontWeight": {
+                "value": 700
+              }
+            }
+          }
+        },
+        {
+          "type": "symbol",
+          "from": {
+            "data": "city"
+          },
+          "encode": {
+            "update": {
+              "x": {
+                "field": "x"
+              },
+              "y": {
+                "field": "y"
+              },
+              "shape": {
+                "value": "diamond"
+              },
+              "size": {
+                "value": 160
+              },
+              "fill": {
+                "value": "#222"
+              }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "from": {
+            "data": "city"
+          },
+          "encode": {
+            "update": {
+              "x": {
+                "field": "x"
+              },
+              "y": {
+                "field": "y"
+              },
+              "dx": {
+                "value": -10
+              },
+              "dy": {
+                "value": -8
+              },
+              "align": {
+                "value": "right"
+              },
+              "text": {
+                "field": "name"
+              },
+              "font": {
+                "value": "Nunito Sans, sans-serif"
+              },
+              "fontSize": {
+                "value": 13
+              },
+              "fontWeight": {
+                "value": 700
+              },
+              "fill": {
+                "value": "#222"
+              }
+            }
+          }
+        },
+        {
+          "type": "rect",
+          "name": "zoom_in",
+          "encode": {
+            "update": {
+              "x": {
+                "signal": "width - 44"
+              },
+              "y": {
+                "value": 10
+              },
+              "width": {
+                "value": 34
+              },
+              "height": {
+                "value": 34
+              },
+              "fill": {
+                "value": "white"
+              },
+              "stroke": {
+                "value": "#b8b8b8"
+              },
+              "cornerRadius": {
+                "value": 6
+              },
+              "cursor": {
+                "value": "pointer"
+              }
+            },
+            "hover": {
+              "fill": {
+                "value": "#f0f0f0"
+              }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "interactive": false,
+          "encode": {
+            "update": {
+              "x": {
+                "signal": "width - 27"
+              },
+              "y": {
+                "value": 27
+              },
+              "align": {
+                "value": "center"
+              },
+              "baseline": {
+                "value": "middle"
+              },
+              "text": {
+                "value": "+"
+              },
+              "font": {
+                "value": "Nunito Sans, sans-serif"
+              },
+              "fontSize": {
+                "value": 20
+              },
+              "fontWeight": {
+                "value": 700
+              },
+              "fill": {
+                "value": "#222"
+              }
+            }
+          }
+        },
+        {
+          "type": "rect",
+          "name": "zoom_out",
+          "encode": {
+            "update": {
+              "x": {
+                "signal": "width - 44"
+              },
+              "y": {
+                "value": 50
+              },
+              "width": {
+                "value": 34
+              },
+              "height": {
+                "value": 34
+              },
+              "fill": {
+                "value": "white"
+              },
+              "stroke": {
+                "value": "#b8b8b8"
+              },
+              "cornerRadius": {
+                "value": 6
+              },
+              "cursor": {
+                "value": "pointer"
+              }
+            },
+            "hover": {
+              "fill": {
+                "value": "#f0f0f0"
+              }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "interactive": false,
+          "encode": {
+            "update": {
+              "x": {
+                "signal": "width - 27"
+              },
+              "y": {
+                "value": 67
+              },
+              "align": {
+                "value": "center"
+              },
+              "baseline": {
+                "value": "middle"
+              },
+              "text": {
+                "value": "−"
+              },
+              "font": {
+                "value": "Nunito Sans, sans-serif"
+              },
+              "fontSize": {
+                "value": 20
+              },
+              "fontWeight": {
+                "value": 700
+              },
+              "fill": {
+                "value": "#222"
+              }
+            }
+          }
+        },
+        {
+          "type": "rect",
+          "name": "reset_btn",
+          "encode": {
+            "update": {
+              "x": {
+                "signal": "width - 62"
+              },
+              "y": {
+                "value": 90
+              },
+              "width": {
+                "value": 52
+              },
+              "height": {
+                "value": 34
+              },
+              "fill": {
+                "value": "white"
+              },
+              "stroke": {
+                "value": "#b8b8b8"
+              },
+              "cornerRadius": {
+                "value": 6
+              },
+              "cursor": {
+                "value": "pointer"
+              }
+            },
+            "hover": {
+              "fill": {
+                "value": "#f0f0f0"
+              }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "interactive": false,
+          "encode": {
+            "update": {
+              "x": {
+                "signal": "width - 36"
+              },
+              "y": {
+                "value": 107
+              },
+              "align": {
+                "value": "center"
+              },
+              "baseline": {
+                "value": "middle"
+              },
+              "text": {
+                "value": "Reset"
+              },
+              "font": {
+                "value": "Nunito Sans, sans-serif"
+              },
+              "fontSize": {
+                "value": 12
+              },
+              "fontWeight": {
+                "value": 700
+              },
+              "fill": {
+                "value": "#222"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

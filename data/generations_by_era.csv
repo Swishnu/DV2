@@ -1,0 +1,59 @@
+era,generation,region,cards,share,era_order
+Black & White,1.0,Kanto,160,0.1338,4
+Black & White,2.0,Johto,75,0.0627,4
+Black & White,3.0,Hoenn,139,0.1162,4
+Black & White,4.0,Sinnoh,131,0.1095,4
+Black & White,5.0,Unova,691,0.5778,4
+Diamond & Pearl,1.0,Kanto,321,0.2651,2
+Diamond & Pearl,2.0,Johto,171,0.1412,2
+Diamond & Pearl,3.0,Hoenn,295,0.2436,2
+Diamond & Pearl,4.0,Sinnoh,424,0.3501,2
+EX,1.0,Kanto,476,0.3267,1
+EX,2.0,Johto,283,0.1942,1
+EX,3.0,Hoenn,698,0.4791,1
+HeartGold & SoulSilver,1.0,Kanto,151,0.3409,3
+HeartGold & SoulSilver,2.0,Johto,174,0.3928,3
+HeartGold & SoulSilver,3.0,Hoenn,56,0.1264,3
+HeartGold & SoulSilver,4.0,Sinnoh,62,0.14,3
+Mega Evolution,1.0,Kanto,137,0.1739,9
+Mega Evolution,2.0,Johto,71,0.0901,9
+Mega Evolution,3.0,Hoenn,117,0.1485,9
+Mega Evolution,4.0,Sinnoh,95,0.1206,9
+Mega Evolution,5.0,Unova,72,0.0914,9
+Mega Evolution,6.0,Kalos,115,0.1459,9
+Mega Evolution,7.0,Alola,62,0.0787,9
+Mega Evolution,8.0,Galar,57,0.0723,9
+Mega Evolution,9.0,Paldea,62,0.0787,9
+Scarlet & Violet,1.0,Kanto,511,0.1753,8
+Scarlet & Violet,2.0,Johto,227,0.0779,8
+Scarlet & Violet,3.0,Hoenn,246,0.0844,8
+Scarlet & Violet,4.0,Sinnoh,199,0.0683,8
+Scarlet & Violet,5.0,Unova,558,0.1914,8
+Scarlet & Violet,6.0,Kalos,119,0.0408,8
+Scarlet & Violet,7.0,Alola,139,0.0477,8
+Scarlet & Violet,8.0,Galar,161,0.0552,8
+Scarlet & Violet,9.0,Paldea,755,0.259,8
+Sun & Moon,1.0,Kanto,573,0.2628,6
+Sun & Moon,2.0,Johto,216,0.0991,6
+Sun & Moon,3.0,Hoenn,286,0.1312,6
+Sun & Moon,4.0,Sinnoh,242,0.111,6
+Sun & Moon,5.0,Unova,231,0.106,6
+Sun & Moon,6.0,Kalos,188,0.0862,6
+Sun & Moon,7.0,Alola,444,0.2037,6
+Sword & Shield,1.0,Kanto,462,0.1695,7
+Sword & Shield,2.0,Johto,258,0.0946,7
+Sword & Shield,3.0,Hoenn,324,0.1189,7
+Sword & Shield,4.0,Sinnoh,321,0.1178,7
+Sword & Shield,5.0,Unova,382,0.1401,7
+Sword & Shield,6.0,Kalos,165,0.0605,7
+Sword & Shield,7.0,Alola,183,0.0671,7
+Sword & Shield,8.0,Galar,631,0.2315,7
+Wizards era,1.0,Kanto,1015,0.7153,0
+Wizards era,2.0,Johto,404,0.2847,0
+XY,1.0,Kanto,389,0.2862,5
+XY,2.0,Johto,139,0.1023,5
+XY,3.0,Hoenn,256,0.1884,5
+XY,4.0,Sinnoh,145,0.1067,5
+XY,5.0,Unova,192,0.1413,5
+XY,6.0,Kalos,236,0.1737,5
+XY,7.0,Alola,2,0.0015,5

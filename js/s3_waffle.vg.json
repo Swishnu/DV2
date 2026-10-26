@@ -1,0 +1,192 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "What 100 cards from a set look like",
+    "subtitle": "Each square is 1 card. Pick an older era to compare with Scarlet & Violet (2023 to 2025).",
+    "anchor": "start"
+  },
+  "data": {
+    "url": "data/waffle_era_rarity.csv"
+  },
+  "params": [
+    {
+      "name": "Era_pick",
+      "value": "Wizards era",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Wizards era",
+          "EX",
+          "Diamond & Pearl",
+          "HeartGold & SoulSilver",
+          "Black & White",
+          "XY",
+          "Sun & Moon",
+          "Sword & Shield"
+        ],
+        "name": "Older era: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.era == Era_pick || datum.era == 'Scarlet & Violet'"
+    },
+    {
+      "calculate": "datum.era == 'Scarlet & Violet' ? 'Scarlet & Violet (2023 to 2025)' : 'Older era: ' + datum.era",
+      "as": "panel"
+    },
+    {
+      "calculate": "datum.tier_no <= 2 ? 'Common or Uncommon' : datum.tier_no == 3 ? 'Rare' : 'Special rare'",
+      "as": "group"
+    }
+  ],
+  "facet": {
+    "column": {
+      "field": "panel",
+      "type": "nominal",
+      "title": null,
+      "sort": "ascending",
+      "header": {
+        "labelFontSize": 13,
+        "labelFontWeight": "bold"
+      }
+    }
+  },
+  "spec": {
+    "width": 330,
+    "height": 330,
+    "layer": [
+      {
+        "mark": {
+          "type": "square",
+          "size": 650,
+          "opacity": 1
+        },
+        "encoding": {
+          "x": {
+            "field": "col",
+            "type": "ordinal",
+            "axis": null
+          },
+          "y": {
+            "field": "row",
+            "type": "ordinal",
+            "axis": null,
+            "sort": "descending"
+          },
+          "color": {
+            "field": "group",
+            "type": "nominal",
+            "title": null,
+            "scale": {
+              "domain": [
+                "Common or Uncommon",
+                "Rare",
+                "Special rare"
+              ],
+              "range": [
+                "#d9d9d9",
+                "#969696",
+                "#6a51a3"
+              ]
+            },
+            "legend": {
+              "orient": "top"
+            }
+          },
+          "tooltip": [
+            {
+              "field": "era",
+              "title": "Era"
+            },
+            {
+              "field": "tier",
+              "title": "Rarity"
+            }
+          ]
+        }
+      },
+      {
+        "transform": [
+          {
+            "calculate": "datum.group == 'Special rare' ? 1 : 0",
+            "as": "is_special"
+          },
+          {
+            "aggregate": [
+              {
+                "op": "sum",
+                "field": "is_special",
+                "as": "specials"
+              }
+            ],
+            "groupby": [
+              "panel"
+            ]
+          },
+          {
+            "calculate": "datum.specials == 0 ? 'No special rares' : datum.specials + ' special rares out of 100'",
+            "as": "label"
+          }
+        ],
+        "mark": {
+          "type": "text",
+          "fontSize": 14,
+          "fontWeight": 800,
+          "color": "#3f2a7a",
+          "baseline": "top"
+        },
+        "encoding": {
+          "x": {
+            "value": 165
+          },
+          "y": {
+            "value": 342
+          },
+          "text": {
+            "field": "label"
+          }
+        }
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Nunito Sans, sans-serif",
+    "title": {
+      "font": "Fredoka, Nunito Sans, sans-serif",
+      "fontSize": 19,
+      "fontWeight": 600,
+      "color": "#222",
+      "subtitleFont": "Nunito Sans, sans-serif",
+      "subtitleFontSize": 13,
+      "subtitleColor": "#5d6573",
+      "anchor": "start",
+      "offset": 10
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 700,
+      "labelColor": "#444",
+      "titleColor": "#444"
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 700,
+      "labelColor": "#444"
+    },
+    "header": {
+      "labelFontSize": 14,
+      "labelFont": "Nunito Sans, sans-serif"
+    },
+    "text": {
+      "fontSize": 12
+    }
+  },
+  "spacing": 60
+}

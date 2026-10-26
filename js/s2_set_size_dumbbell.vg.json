@@ -1,0 +1,254 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Scarlet & Violet sets hid the most secret cards",
+    "subtitle": "Grey dot = numbered cards. Orange dot = total including secret cards.",
+    "anchor": "start"
+  },
+  "width": "container",
+  "height": 340,
+  "data": {
+    "url": "data/eras.csv"
+  },
+  "transform": [
+    {
+      "calculate": "year(datum.start) + ' to ' + year(datum.end)",
+      "as": "years"
+    },
+    {
+      "calculate": "datum.era + ' (' + datum.years + ')'",
+      "as": "era_label"
+    },
+    {
+      "calculate": "datum.avg_total - datum.avg_official",
+      "as": "secret"
+    }
+  ],
+  "encoding": {
+    "y": {
+      "field": "era_label",
+      "type": "nominal",
+      "title": null,
+      "sort": {
+        "field": "era_order",
+        "op": "min"
+      },
+      "axis": {
+        "labelFontSize": 12,
+        "labelLimit": 300
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#e6550d"
+      },
+      "encoding": {
+        "x": {
+          "field": "avg_official",
+          "type": "quantitative",
+          "title": "Cards per set",
+          "scale": {
+            "domain": [
+              80,
+              230
+            ]
+          }
+        },
+        "x2": {
+          "field": "avg_total"
+        },
+        "opacity": {
+          "condition": {
+            "test": "datum.era == 'Scarlet & Violet'",
+            "value": 1
+          },
+          "value": 0.45
+        },
+        "strokeWidth": {
+          "condition": {
+            "test": "datum.era == 'Scarlet & Violet'",
+            "value": 6
+          },
+          "value": 3
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 120,
+        "color": "#969696"
+      },
+      "encoding": {
+        "x": {
+          "field": "avg_official",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "era",
+            "title": "Era"
+          },
+          {
+            "field": "avg_official",
+            "type": "quantitative",
+            "title": "Numbered cards"
+          },
+          {
+            "field": "avg_total",
+            "type": "quantitative",
+            "title": "With secret cards"
+          }
+        ],
+        "opacity": {
+          "condition": {
+            "test": "datum.era == 'Scarlet & Violet'",
+            "value": 1
+          },
+          "value": 0.55
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 120,
+        "color": "#e6550d"
+      },
+      "encoding": {
+        "x": {
+          "field": "avg_total",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "era",
+            "title": "Era"
+          },
+          {
+            "field": "avg_official",
+            "type": "quantitative",
+            "title": "Numbered cards"
+          },
+          {
+            "field": "avg_total",
+            "type": "quantitative",
+            "title": "With secret cards"
+          },
+          {
+            "field": "secret",
+            "type": "quantitative",
+            "title": "Secret cards"
+          }
+        ],
+        "opacity": {
+          "condition": {
+            "test": "datum.era == 'Scarlet & Violet'",
+            "value": 1
+          },
+          "value": 0.55
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.secret >= 20"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 12,
+        "color": "#e6550d"
+      },
+      "encoding": {
+        "x": {
+          "field": "avg_total",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "secret",
+          "type": "quantitative",
+          "format": "+d"
+        },
+        "opacity": {
+          "condition": {
+            "test": "datum.era == 'Scarlet & Violet'",
+            "value": 1
+          },
+          "value": 0.6
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.era == 'Scarlet & Violet'"
+        },
+        {
+          "calculate": "(toNumber(datum.avg_official) + toNumber(datum.avg_total)) / 2",
+          "as": "mid"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "dy": -16,
+        "fontSize": 12,
+        "fontWeight": 800,
+        "color": "#e6550d"
+      },
+      "encoding": {
+        "x": {
+          "field": "mid",
+          "type": "quantitative"
+        },
+        "text": {
+          "value": "the most secret cards of any era"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Nunito Sans, sans-serif",
+    "title": {
+      "font": "Fredoka, Nunito Sans, sans-serif",
+      "fontSize": 19,
+      "fontWeight": 600,
+      "color": "#222",
+      "subtitleFont": "Nunito Sans, sans-serif",
+      "subtitleFontSize": 13,
+      "subtitleColor": "#5d6573",
+      "anchor": "start",
+      "offset": 10
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 700,
+      "labelColor": "#444",
+      "titleColor": "#444"
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 700,
+      "labelColor": "#444"
+    },
+    "header": {
+      "labelFontSize": 14,
+      "labelFont": "Nunito Sans, sans-serif"
+    },
+    "text": {
+      "fontSize": 12
+    }
+  }
+}

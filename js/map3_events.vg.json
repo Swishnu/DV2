@@ -1,0 +1,281 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Australia hosted 7 of the 74 official tournaments (Sept 2024 to Sept 2026)",
+    "subtitle": "Australian events are outlined in black; bigger dot = more players. Drag across the timeline under the map to show only those months.",
+    "anchor": "start"
+  },
+  "data": {
+    "url": "data/events_map.csv"
+  },
+  "transform": [
+    {
+      "calculate": "datum.tier == 'Special Event' ? 'Special event' : datum.tier == 'International' ? 'International championship' : datum.tier == 'Worlds' ? 'World Championships' : 'Regional championship'",
+      "as": "event_type"
+    }
+  ],
+  "vconcat": [
+    {
+      "width": 860,
+      "height": 380,
+      "projection": {
+        "type": "equalEarth"
+      },
+      "layer": [
+        {
+          "data": {
+            "url": "js/ne_110m_admin_0_countries.topojson",
+            "format": {
+              "type": "topojson",
+              "feature": "ne_110m_admin_0_countries"
+            }
+          },
+          "transform": [
+            {
+              "filter": "datum.properties.ADM0_A3 != 'ATA'"
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "fill": "#e5e5e5",
+            "stroke": "white",
+            "strokeWidth": 0.5
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": {
+                "param": "Date_brush"
+              }
+            }
+          ],
+          "mark": {
+            "type": "circle"
+          },
+          "encoding": {
+            "longitude": {
+              "field": "lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "lat",
+              "type": "quantitative"
+            },
+            "size": {
+              "field": "players",
+              "type": "quantitative",
+              "title": "Players",
+              "scale": {
+                "domain": [
+                  0,
+                  4000
+                ],
+                "range": [
+                  10,
+                  500
+                ]
+              },
+              "legend": {
+                "values": [
+                  500,
+                  2000,
+                  4000
+                ],
+                "orient": "top",
+                "direction": "horizontal"
+              }
+            },
+            "color": {
+              "field": "event_type",
+              "type": "nominal",
+              "title": "Event",
+              "scale": {
+                "domain": [
+                  "Special event",
+                  "Regional championship",
+                  "International championship",
+                  "World Championships"
+                ],
+                "range": [
+                  "#c6dbef",
+                  "#6baed6",
+                  "#2171b5",
+                  "#08306b"
+                ]
+              },
+              "legend": {
+                "orient": "top",
+                "direction": "horizontal"
+              }
+            },
+            "tooltip": [
+              {
+                "field": "name",
+                "title": "Event"
+              },
+              {
+                "field": "date",
+                "type": "temporal",
+                "title": "Date",
+                "format": "%d %b %Y"
+              },
+              {
+                "field": "players",
+                "type": "quantitative",
+                "title": "Players",
+                "format": ","
+              }
+            ],
+            "opacity": {
+              "condition": {
+                "test": "datum.host_iso2 == 'AU'",
+                "value": 1
+              },
+              "value": 0.35
+            },
+            "stroke": {
+              "condition": {
+                "test": "datum.host_iso2 == 'AU'",
+                "value": "#222"
+              },
+              "value": "white"
+            },
+            "strokeWidth": {
+              "condition": {
+                "test": "datum.host_iso2 == 'AU'",
+                "value": 2
+              },
+              "value": 0.8
+            },
+            "order": {
+              "condition": {
+                "test": "datum.host_iso2 == 'AU'",
+                "value": 1
+              },
+              "value": 0
+            }
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "lon": 118,
+                "lat": -40,
+                "t": [
+                  "7 events in Australia:",
+                  "Perth, Brisbane,",
+                  "Melbourne and Sydney"
+                ]
+              }
+            ]
+          },
+          "mark": {
+            "type": "text",
+            "align": "right",
+            "fontSize": 11,
+            "fontStyle": "italic",
+            "baseline": "top",
+            "lineHeight": 12
+          },
+          "encoding": {
+            "longitude": {
+              "field": "lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "lat",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "t"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "width": 860,
+      "height": 70,
+      "title": {
+        "text": "Players per month (drag here)",
+        "fontSize": 12,
+        "anchor": "start"
+      },
+      "params": [
+        {
+          "name": "Date_brush",
+          "select": {
+            "type": "interval",
+            "encodings": [
+              "x"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "bar",
+        "color": "#969696"
+      },
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "timeUnit": "yearmonth",
+          "title": null,
+          "axis": {
+            "format": "%b %Y",
+            "tickCount": 12
+          }
+        },
+        "y": {
+          "field": "players",
+          "type": "quantitative",
+          "aggregate": "sum",
+          "title": null,
+          "axis": {
+            "tickCount": 2
+          }
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Nunito Sans, sans-serif",
+    "title": {
+      "font": "Fredoka, Nunito Sans, sans-serif",
+      "fontSize": 19,
+      "fontWeight": 600,
+      "color": "#222",
+      "subtitleFont": "Nunito Sans, sans-serif",
+      "subtitleFontSize": 13,
+      "subtitleColor": "#5d6573",
+      "anchor": "start",
+      "offset": 10
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 700,
+      "labelColor": "#444",
+      "titleColor": "#444"
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 700,
+      "labelColor": "#444"
+    },
+    "header": {
+      "labelFontSize": 14,
+      "labelFont": "Nunito Sans, sans-serif"
+    },
+    "text": {
+      "fontSize": 12
+    }
+  }
+}

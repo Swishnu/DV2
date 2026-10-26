@@ -1,0 +1,197 @@
+:root {
+    --red: #d9342b;
+    --text: #222;
+    --muted: #666;
+    --rule: #e5e5e5;
+}
+
+body * {
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+body {
+    background: white;
+    color: var(--text);
+    line-height: 1.6;
+    margin: 0;
+}
+
+
+.intro,
+.page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.intro {
+    padding-top: 56px;
+    padding-bottom: 24px;
+}
+
+h1, h2, h3 {
+    font-family: 'Fredoka', 'Nunito Sans', sans-serif;
+}
+
+h1 {
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.5px;
+    margin: 0 0 18px;
+}
+
+.lead {
+    font-size: 19px;
+    line-height: 1.6;
+    color: #555;
+    max-width: 62ch;
+}
+
+section {
+    border-top: 1px solid var(--rule);
+    padding: 40px 0 16px;
+    scroll-margin-top: 16px;
+}
+
+.namebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+h2 {
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 1.15;
+    margin: 0 0 12px;
+}
+
+
+h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 8px;
+}
+
+p {
+    font-size: 16px;
+    max-width: 70ch;
+    margin: 0 0 14px;
+}
+
+.vis-container {
+    width: 100%;
+    margin: 8px 0 32px -5px;
+    overflow-x: auto;
+}
+
+.vis-container.vega-embed {
+    display: block;
+}
+
+.description-left {
+    padding-right: 24px;
+}
+
+.description-right {
+    padding-left: 24px;
+    padding-top: 5px;
+}
+
+.description-right h3 {
+    font-size: 17px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+.terms {
+    margin-top: 18px;
+}
+
+.terms p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.note {
+    font-size: 14px;
+    font-style: italic;
+    color: var(--muted);
+    margin-top: -20px;
+    margin-bottom: 32px;
+}
+
+.small-font,
+.small-font p,
+.small-font li {
+    font-size: 14px;
+    color: var(--muted);
+}
+
+footer {
+    border-top: 1px solid var(--rule);
+    padding: 24px 0 40px;
+}
+
+footer a {
+    color: var(--text);
+}
+
+.vega-bind {
+    margin-top: 6px;
+    font-size: 14px;
+}
+
+.vega-bind-name {
+    font-weight: 800;
+}
+
+a:focus-visible,
+select:focus-visible,
+input:focus-visible {
+    outline: 3px solid var(--red);
+    outline-offset: 2px;
+}
+
+@media (max-width: 700px) {
+    .intro {
+        padding-top: 32px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    h2 {
+        font-size: 26px;
+    }
+
+    .description-left,
+    .description-right {
+        padding: 0;
+    }
+}
+
+.vega-bind label {
+    margin-right: 14px;
+}
+
+.vega-bind input[type="radio"] {
+    margin-right: 4px;
+}
+
+.au {
+  color: #d9342b;
+  font-weight: 700;
+}
+
+.secret {
+  color: #e6550d;
+  font-weight: 700;
+}
+
+.special {
+  color: #6a51a3;
+  font-weight: 700;
+}
